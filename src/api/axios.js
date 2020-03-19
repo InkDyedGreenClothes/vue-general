@@ -2,27 +2,24 @@
  * @Author: Longlong
  * @Date: 2020-03-17 15:19:04
  * @LastEditors: Longlong
- * @LastEditTime: 2020-03-18 17:31:23
+ * @LastEditTime: 2020-03-19 10:59:39
  * @Descripttion: 接口请求配置
  */
 import axios from 'axios'
 import util from '@/utils/util'
 import router from '@/router'
-
+// 拿到全局配置项
+let _global = window.g
 // 设置默认接口地址
 if (process.env.NODE_ENV == "development") {
   axios.defaults.baseURL = "/api" //设置默认接口地址
 } else if (process.env.NODE_ENV == "production") {
-  //baseUrl = "测试地址";
-  //baseUrl = "预发布地址";
-  axios.defaults.baseURL = window.g.baseUrl //设置默认接口地址
+  axios.defaults.baseURL = _global.axios.baseUrl //设置默认接口地址
 }
 
-axios.defaults.timeout = window.g.axiosTimeout // 设置请求时间
+axios.defaults.timeout = _global.axios.timeout // 设置请求时间
 // axios.defaults.baseURL = baseUrl //设置默认接口地址
-axios.defaults.headers.post['Content-Type'] = window.g.axiosHeader // 设置请求头
-console.log(window.g)
-console.log(axios.defaults)
+axios.defaults.headers.post['Content-Type'] = _global.axios.header // 设置请求头
 // http request 拦截器
 axios.interceptors.request.use(
   config => {
@@ -40,7 +37,7 @@ axios.interceptors.response.use(
   response => {
     // 拦截响应做统一处理
     switch (response.data.code) {
-      case '000':
+      case _global.error.loginOut:
         router.replace({
           path: '/login'
         })

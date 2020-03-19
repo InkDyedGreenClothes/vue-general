@@ -2,7 +2,7 @@
  * @Author: Longlong
  * @Date: 2020-03-18 13:59:13
  * @LastEditors: Longlong
- * @LastEditTime: 2020-03-18 17:18:15
+ * @LastEditTime: 2020-03-19 10:47:01
  * @Descripttion: describe
  -->
 <template>
@@ -42,11 +42,22 @@
 <script>
 export default {
   name: 'HelloWorld',
+  data () {
+    return {
+      text: '123'
+    }
+  },
   props: {
     msg: String
   },
   mounted () {
-    // console.log(window.g.baseUrl)
+    window._self = this
+    this.add()
+  },
+  methods: {
+    add() {
+      window._self.$util.Log(window._self.text)
+    }
   }
 }
 </script>

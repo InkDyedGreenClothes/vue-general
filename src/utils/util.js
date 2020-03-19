@@ -2,7 +2,7 @@
  * @Author: Longlong
  * @Date: 2020-03-17 15:23:10
  * @LastEditors: Longlong
- * @LastEditTime: 2020-03-18 14:54:35
+ * @LastEditTime: 2020-03-19 14:29:57
  * @Descripttion: 通用方法
  */
 var cachedToken = '' // 定义全局token
@@ -19,29 +19,91 @@ const util = {
   },
   /**
    * @name: Longlong
+   * @description: 设置token
+   * @method: setToken
+   * @for: util
+   * @param {token}
+   */
+  setToken (token) {
+    localStorage.setItem(window.g.token, token)
+  },
+  /**
+   * @name: Longlong
    * @description: 获取用户token
    * @method: getToken
    * @for: util
-   * @param {type}
    * @return: {cachedToken}
    */
   getToken () {
     if (cachedToken) {
       return cachedToken
     }
-    return localStorage.getItem('token')
+    return localStorage.getItem(window.g.token)
   },
   /**
    * @name: Longlong
-   * @description: 设置token
+   * @description: 删除token
    * @method: setToken
    * @for: util
-   * @param {token}
+   */
+  delToken () {
+    localStorage.removeItem(window.g.token)
+  },
+  /**
+   * @name: Longlong
+   * @description: 清除所有缓存
+   * @method: delStorageAll
+   * @for: util
+   * @param {name}
    * @return: {token}
    */
-  setToken (token) {
-    cachedToken = token
-    localStorage.setItem('token', token)
+  delStorageAll () {
+    localStorage.clear();  //  删除全部数据                 
+  },
+  /**
+ * @name: Longlong
+ * @description: 设置 cookie
+ * @method: setCookie
+ * @for: util
+ * @param {name：cookie 名册, value: cookie 值, day: cookie 过期时间(默认365天)} {参数类型} 参数名 参数说明
+ */
+  setCookie (name, value, day) {
+    var Days = day || 365 //天数设置
+    var exp = new Date()
+    exp.setTime(exp.getTime() +Days *24 * 60 * 60 * 1000)
+    document.cookie = name + "=" + escape(value) + ";expires=" +exp.toDateString()
+    // document.cookie = name + "="+ escape (value) + ";domain=(这里可以放入指定使用的域名);expires=" + exp.toGMTString();
+  },
+  /**
+ * @name: Longlong
+ * @description: 获取token
+ * @method: getCookie
+ * @for: util
+ * @param {name: 需要获取的 cookie 名称} {参数类型} 参数名 参数说明
+ */
+  getCookie (name) {
+    var arr,
+        reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)")
+    if ((arr = document.cookie.match(reg))) {
+      return unescape(arr[2]);
+    } else {
+      return null;
+    }
+  },
+  /**
+ * @name: Longlong
+ * @description: 删除cookie
+ * @method: delCookie
+ * @for: util
+ * @param {name: 需要获取的 cookie 名称} {参数类型} 参数名 参数说明
+ */
+  delCookie (name) {
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = this.getCookie(name);
+    if (cval != null) {
+      document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+    }
   },
   /**
    * @name: Longlong
