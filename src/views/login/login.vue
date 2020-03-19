@@ -2,7 +2,7 @@
  * @Author: Longlong
  * @Date: 2020-03-19 11:15:54
  * @LastEditors: Longlong
- * @LastEditTime: 2020-03-19 14:27:17
+ * @LastEditTime: 2020-03-19 14:56:43
  * @Descripttion: describe
  -->
 <template>
@@ -24,6 +24,9 @@ export default {
       account: "", // 账号
       password: "" // 密码
     }
+  },
+  mounted () {
+    this.$util.delToken()
   },
   methods: {
     login() {

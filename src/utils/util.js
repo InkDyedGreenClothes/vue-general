@@ -2,7 +2,7 @@
  * @Author: Longlong
  * @Date: 2020-03-17 15:23:10
  * @LastEditors: Longlong
- * @LastEditTime: 2020-03-19 14:29:57
+ * @LastEditTime: 2020-03-19 15:08:09
  * @Descripttion: 通用方法
  */
 var cachedToken = '' // 定义全局token
@@ -12,7 +12,7 @@ const util = {
    * @name: Longlong
    * @description: 封装console.log
    * @method: Log
-   * @param {需要打印信息}
+   * @param {text}
    */
   Log (text) {
     window.console.log(text)
@@ -25,6 +25,7 @@ const util = {
    * @param {token}
    */
   setToken (token) {
+    cachedToken = token
     localStorage.setItem(window.g.token, token)
   },
   /**
@@ -76,7 +77,7 @@ const util = {
   },
   /**
  * @name: Longlong
- * @description: 获取token
+ * @description: 获取Cookie
  * @method: getCookie
  * @for: util
  * @param {name: 需要获取的 cookie 名称} {参数类型} 参数名 参数说明
@@ -125,7 +126,7 @@ const util = {
    * @param {type: minute(年月日时分),second(年月日时分秒),month(年月),monthToMinute(月日时分),dateTime(年月日),time(时分秒)}
    * @return {2020-03-17}
    */
-  formatterDate (date, type) {
+  formatterDate (type, date) {
     if (!date) {
       date = new Date()
     }

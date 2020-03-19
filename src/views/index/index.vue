@@ -2,7 +2,7 @@
  * @Author: Longlong
  * @Date: 2020-03-19 11:20:25
  * @LastEditors: Longlong
- * @LastEditTime: 2020-03-19 14:24:33
+ * @LastEditTime: 2020-03-19 14:47:53
  * @Descripttion: describe
  -->
 <template>
@@ -21,12 +21,7 @@ export default {
   },
   mounted () {
     let _self = this
-    _self.$util.Log(_self.$util.getToken())
-    if (!_self.$util.getToken()) {
-      _self.$router.replace({
-        path: '/login'
-      })
-    }
+    // _self.$util.Log(_self.$util.getToken())
   },
   methods: {
     loginOut() {

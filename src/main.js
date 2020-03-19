@@ -2,7 +2,7 @@
  * @Author: Longlong
  * @Date: 2020-03-18 13:59:13
  * @LastEditors: Longlong
- * @LastEditTime: 2020-03-19 14:29:42
+ * @LastEditTime: 2020-03-19 15:04:56
  * @Descripttion: main
  */
 import Vue from 'vue'
@@ -17,65 +17,23 @@ Vue.prototype.$util = util
 Vue.prototype.$get = fetch
 Vue.prototype.$post = post
 
-// /**
-//  * @name: Longlong
-//  * @description: 设置 cookie
-//  * @method: setCookie
-//  * @for: Vue.prototype (this)
-//  * @param {name：cookie 名册, value: cookie 值, day: cookie 过期时间(默认365天)} {参数类型} 参数名 参数说明
-//  */
-// Vue.prototype.setCookie = function (name, value, day) {
-//   var Days = day || 365 //天数设置
-//   var exp = new Date()
-//   exp.setTime(exp.getTime() +Days *24 * 60 * 60 * 1000)
-//   document.cookie = name + "=" + escape(value) + ";expires=" +exp.toDateString()
-//   // document.cookie = name + "="+ escape (value) + ";domain=(这里可以放入指定使用的域名);expires=" + exp.toGMTString();
-// }
-// /**
-//  * @name: Longlong
-//  * @description: 获取token
-//  * @method: getCookie
-//  * @for: Vue.prototype (this)
-//  * @param {name: 需要获取的 cookie 名称} {参数类型} 参数名 参数说明
-//  */
-// Vue.prototype.getCookie = function (name) {
-//   var arr,
-//       reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)")
-//   if ((arr = document.cookie.match(reg))) {
-//     return unescape(arr[2]);
-//   } else {
-//     return null;
-//   }
-// }
-// /**
-//  * @name: Longlong
-//  * @description: 删除cookie
-//  * @method: delCookie
-//  * @for: Vue.prototype (this)
-//  * @param {name: 需要获取的 cookie 名称} {参数类型} 参数名 参数说明
-//  */
-// Vue.prototype.delCookie = function (name) {
-//   var exp = new Date();
-//   exp.setTime(exp.getTime() - 1);
-//   var cval = this.getCookie(name);
-//   if (cval != null) {
-//     document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
-//   }
-// }
+const whiteList = ['/login'] // 白名单页面
 // 路由拦截
 router.beforeEach((to, from, next) => {
-  if (to.matched[0].meta.requireAuth) {
-    // 判断是否登陆
-    if (Vue.prototype.$util.getItem(window.g.token)) {
-      next()
+  // 是否已经登陆
+  if (Vue.prototype.$util.getToken()) {
+    if (to.path === '/login') {
+      next({ path: '/' })
     } else {
-      next({
-        name: "login"
-      })
+      next()
     }
   } else {
-    // 不需要登陆
-    next()
+    // 在免登录白名单，直接进入
+    if (whiteList.indexOf(to.path) !== -1) {
+      next()
+    } else {
+      next('/login') // 否则全部重定向到登录页
+    }
   }
 })
 
