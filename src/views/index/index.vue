@@ -2,13 +2,13 @@
  * @Author: Longlong
  * @Date: 2020-03-19 11:20:25
  * @LastEditors: Longlong
- * @LastEditTime: 2020-03-19 14:47:53
+ * @LastEditTime: 2020-03-19 16:25:04
  * @Descripttion: describe
  -->
 <template>
   <div class="index">
     {{ name }}
-    <button @click="loginOut">退出</button>
+    <button @click="loginOut">设置</button>
   </div>
 </template>
 
@@ -26,8 +26,7 @@ export default {
   methods: {
     loginOut() {
       let _self = this
-      _self.$util.delToken()
-      _self.$router.replace('/login')
+      _self.$router.replace("/system");
     }
   }
 }

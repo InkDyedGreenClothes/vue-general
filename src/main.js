@@ -2,7 +2,7 @@
  * @Author: Longlong
  * @Date: 2020-03-18 13:59:13
  * @LastEditors: Longlong
- * @LastEditTime: 2020-03-19 15:04:56
+ * @LastEditTime: 2020-03-19 16:24:18
  * @Descripttion: main
  */
 import Vue from 'vue'
@@ -21,8 +21,10 @@ const whiteList = ['/login'] // 白名单页面
 // 路由拦截
 router.beforeEach((to, from, next) => {
   // 是否已经登陆
-  if (Vue.prototype.$util.getToken()) {
-    if (to.path === '/login') {
+  if (util.getToken()) {
+    if (from.path === '/system') {
+      next()
+    } else if (to.path === '/login') {
       next({ path: '/' })
     } else {
       next()
@@ -32,6 +34,7 @@ router.beforeEach((to, from, next) => {
     if (whiteList.indexOf(to.path) !== -1) {
       next()
     } else {
+      console.log(123)
       next('/login') // 否则全部重定向到登录页
     }
   }
