@@ -2,7 +2,7 @@
  * @Author: Longlong
  * @Date: 2020-03-19 11:15:54
  * @LastEditors: Longlong
- * @LastEditTime: 2020-03-19 16:28:15
+ * @LastEditTime: 2020-03-19 17:05:55
  * @Descripttion: describe
  -->
 <template>
@@ -71,6 +71,7 @@ export default {
   },
   mounted() {
     this.$util.delToken();
+    // this.$util.Toast(123)
   },
   methods: {
     switchBtn() {

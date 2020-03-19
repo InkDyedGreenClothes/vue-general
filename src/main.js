@@ -2,15 +2,20 @@
  * @Author: Longlong
  * @Date: 2020-03-18 13:59:13
  * @LastEditors: Longlong
- * @LastEditTime: 2020-03-19 16:24:18
+ * @LastEditTime: 2020-03-19 17:31:33
  * @Descripttion: main
  */
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import 'lib-flexible/flexible'
 import util from '@/utils/util'
 import { post, fetch } from '@/api/axios'
+
+import { Button, Toast } from 'vant'
+Vue.use(Button)
+  .use(Toast)
 
 Vue.config.productionTip = false
 Vue.prototype.$util = util

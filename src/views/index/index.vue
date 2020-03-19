@@ -2,13 +2,15 @@
  * @Author: Longlong
  * @Date: 2020-03-19 11:20:25
  * @LastEditors: Longlong
- * @LastEditTime: 2020-03-19 16:25:04
+ * @LastEditTime: 2020-03-19 17:00:31
  * @Descripttion: describe
  -->
 <template>
   <div class="index">
     {{ name }}
     <button @click="loginOut">设置</button>
+    <!-- 开启 safe-area-inset-bottom 属性 -->
+    <van-number-keyboard safe-area-inset-bottom />
   </div>
 </template>
 

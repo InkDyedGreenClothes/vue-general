@@ -2,7 +2,7 @@
  * @Author: Longlong
  * @Date: 2020-03-17 15:23:10
  * @LastEditors: Longlong
- * @LastEditTime: 2020-03-19 15:08:09
+ * @LastEditTime: 2020-03-19 17:05:07
  * @Descripttion: 通用方法
  */
 var cachedToken = '' // 定义全局token
@@ -16,6 +16,17 @@ const util = {
    */
   Log (text) {
     window.console.log(text)
+  },
+  /**
+   * @name: Longlong
+   * @description: Toast 轻提示
+   * @method: show
+   * @for: By the name of this class
+   * @param {type} {参数类型} 参数名 参数说明
+   * @return: {返回值类型} 返回值说明
+   */
+  Toast(text) {
+    Toast(text)
   },
   /**
    * @name: Longlong
