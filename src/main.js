@@ -11,16 +11,27 @@ import router from './router'
 import store from './store'
 import 'lib-flexible/flexible'
 import util from '@/utils/util'
+import md5 from 'js-md5'
 import { post, fetch } from '@/api/axios'
 
-import { Button, Toast } from 'vant'
+import {
+  Button,
+  Toast,
+  Form,
+  Field,
+  NavBar
+} from 'vant'
 Vue.use(Button)
   .use(Toast)
+  .use(Form)
+  .use(Field)
+  .use(NavBar)
 
 Vue.config.productionTip = false
 Vue.prototype.$util = util
 Vue.prototype.$get = fetch
 Vue.prototype.$post = post
+Vue.prototype.$md5 = md5
 
 const whiteList = ['/login'] // 白名单页面
 // 路由拦截
